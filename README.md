@@ -1,6 +1,9 @@
 # Best fit User matching
 
-A simple way to match users based on multiple attributes
+A simple way to match users based on multiple attributes 
+
+## Demo
+Take a look at the [demo](https://mrarlloyd.github.io/)
 
 ## Javascript
 
