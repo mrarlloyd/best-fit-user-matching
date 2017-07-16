@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="Alex Lloyd">
+
+  <title>Best-fit User Matching</title>
+
+  <script src="./UserMatching.js"></script>
+</head>
+
+<body>
+  <h1>Best-fit User Matching</h1>
+  <h2>Javascript</h2>
+  <p>
+    Check the console for all matches, but for this current test set... the best match is _id:
+    <span id="bestMatchId" style="font-weight:bold;"></span>
+  </p>
+  <p>
+    Could expand this using <a href="https://www.npmjs.com/package/random-user-generator" target="_blank">Random User Generator</a>
+  </p>
+
+  <h2>MongoDB</h2>
+  <p>
+    Something along these lines... would need some testing to optimize.
+    <pre>
+      MongoUsersCollection.aggregate([
+        { "$match": {[ "tags": { "$in": primaryUser.tags } }, "categories": { "$in": primaryUser.categories } } ]},
+        { "$project": { "size": { "$size": { [{"$setIntersection": [ primaryUser.tags, "$tags" ]},{"$setIntersection": [ primaryUser.categories, "$categories" ]} ]} } }}, { "$sort": { "size": -1 } }, { "$limit": 1 }
+      ])
+    </pre>
+  </p>
+
+</body>
+<script>
+  document.getElementById('bestMatchId').innerHTML = bestMatch.slice(0, 1).map(currentMatch => currentMatch._id);
+
+  console.log('--- Best match ---');
+  console.log(bestMatch.slice(0, 1).map(currentMatch => currentMatch));
+
+  console.log('--- All matches ---');
+  console.log(bestMatch);
+</script>
+
+</html>
