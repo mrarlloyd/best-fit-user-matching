@@ -1,6 +1,6 @@
 # Best fit User matching
 
-A simple way to match users based on multiple attributes 
+A simple way to match users based on multiple attributes. In the real world I would make use of a library like [Match Sorter](https://www.npmjs.com/package/match-sorter).
 
 ## Demo
 Take a look at the [demo](https://mrarlloyd.github.io/)
